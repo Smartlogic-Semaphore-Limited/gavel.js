@@ -60,9 +60,9 @@ describe 'JsonExample', ->
         before ->
           bodyValidator = new JsonExample fixtures.sampleJsonSimpleKeyMissing ,fixtures.sampleJson
         describe 'and i run validate()', ->
-          it "should return 1 errors", ->
+          it "should return 2 errors", ->
             result = bodyValidator.validate()
-            assert.equal result.length, 1
+            assert.equal result.length, 2
 
       describe.skip 'when value has different primitive type', ->
         before ->
@@ -76,9 +76,42 @@ describe 'JsonExample', ->
         before ->
           bodyValidator = new JsonExample fixtures.sampleJsonSimpleKeyValueDiffers ,fixtures.sampleJson
         describe 'and i run validate()', ->
-          it "shouldn't return any errors", ->
+          it "should return an error", ->
+            result = bodyValidator.validate()
+            assert.equal result.length, 1
+
+      describe 'when array is shorter than schema', ->
+        before ->
+          bodyValidator = new JsonExample fixtures.shortSampleJson, fixtures.shortSampleJsonWithAddedElement
+        describe 'and i run validate()', ->
+          it "should return an error", ->
+            result = bodyValidator.validate()
+            assert.equal result.length, 2
+
+      describe 'when array is longer than schema', ->
+        before ->
+          bodyValidator = new JsonExample fixtures.shortSampleJsonWithAddedElement, fixtures.shortSampleJson
+        describe 'and i run validate()', ->
+          it "should return an error", ->
+            result = bodyValidator.validate()
+            assert.equal result.length, 1
+            assert.equal result[0].message, 'The list list,2 has an unexpected additional item: c'
+
+      describe 'when value matches provided regexp', ->
+        before ->
+          bodyValidator = new JsonExample fixtures.sampleJson, fixtures.sampleJsonWithValidRegexp
+        describe 'and i run validate()', ->
+          it "should not return an error", ->
             result = bodyValidator.validate()
             assert.equal result.length, 0
+
+      describe 'when value does not match provided regexp', ->
+        before ->
+          bodyValidator = new JsonExample fixtures.sampleJson, fixtures.sampleJsonWithInvalidRegexp
+        describe 'and i run validate()', ->
+          it "should return an error", ->
+            result = bodyValidator.validate()
+            assert.equal result.length, 1
 
       describe 'when key is added to provided data', ->
         before ->

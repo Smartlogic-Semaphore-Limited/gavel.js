@@ -105,13 +105,15 @@ class SchemaV4Generator
         schemaDict['additionalProperties'] = true
 
     else if schemaType is 'array'
-      if properties.keysStrict
         schemaDict['additionalItems'] = false
-      else
-        schemaDict['additionalItems'] = true
 
     if properties.valuesStrict is true and @isBaseType schemaType
-      schemaDict['enum'] = [baseObject]
+      if (schemaType is 'string' and baseObject.indexOf("%/") is 0 and
+          baseObject.indexOf("/%") is (baseObject.length - 2))
+        regexp = baseObject.slice(2, baseObject.length - 2)
+        schemaDict['pattern'] = regexp
+      else
+        schemaDict['enum'] = [baseObject]
 
     else if Array.isArray(properties.valuesStrict) and @isBaseType schemaType
       if properties.valuesStrict.indexOf(objectId?.toLowerCase()) > -1

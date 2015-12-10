@@ -4,9 +4,105 @@ emptyStringJson = '''
 }
 '''
 
+shortSampleJson = '''
+{
+  "list": ["a", "b"]
+}
+'''
+
+shortSampleJsonWithAddedElement = '''
+{
+  "list": ["a", "b", "c"]
+}
+'''
+
 sampleJson = '''
 {
   "simple_key_value_pair": "simple_key_value_pair_value",
+  "complex_key_value_pair": {
+    "complex_key_value_pair_key1" : "complex_key_value_pair_value1",
+    "complex_key_value_pair_key2" : "complex_key_value_pair_value2",
+    "complex_key_value_pair_key3" : {
+      "complex_key_value_pair_key1_in_nested_hash": "complex_key_value_pair_value1_in_nested_hash",
+      "complex_key_value_pair_key2_in_nested_hash": "complex_key_value_pair_value2_in_nested_hash"
+      }
+    },
+
+  "array_of_hashes": [
+    {
+      "array_of_hashes_item1_key1": "array_of_hashes_item1_value1",
+      "array_of_hashes_item1_key2": "array_of_hashes_item1_value2"
+    },
+    {
+      "array_of_hashes_item2_key1": "array_of_hashes_item2_value1",
+      "array_of_hashes_item2_key2": "array_of_hashes_item2_value2"
+    }
+
+  ],
+  "array_of_mixed_simple_types": [1,2,"a","b"],
+  "array_of_same_simple_types": ["a","b"]
+}
+'''
+
+sampleJsonArrayHasAdditionalElement = '''
+{
+  "simple_key_value_pair": "simple_key_value_pair_value",
+  "complex_key_value_pair": {
+    "complex_key_value_pair_key1" : "complex_key_value_pair_value1",
+    "complex_key_value_pair_key2" : "complex_key_value_pair_value2",
+    "complex_key_value_pair_key3" : {
+      "complex_key_value_pair_key1_in_nested_hash": "complex_key_value_pair_value1_in_nested_hash",
+      "complex_key_value_pair_key2_in_nested_hash": "complex_key_value_pair_value2_in_nested_hash"
+      }
+    },
+
+  "array_of_hashes": [
+    {
+      "array_of_hashes_item1_key1": "array_of_hashes_item1_value1",
+      "array_of_hashes_item1_key2": "array_of_hashes_item1_value2"
+    },
+    {
+      "array_of_hashes_item2_key1": "array_of_hashes_item2_value1",
+      "array_of_hashes_item2_key2": "array_of_hashes_item2_value2"
+    }
+
+  ],
+  "array_of_mixed_simple_types": [1,2,"a","b"],
+  "array_of_same_simple_types": ["a","b","c"]
+}
+'''
+
+sampleJsonWithValidRegexp = '''
+{
+  "simple_key_value_pair": "%/^simple.*value$/%",
+  "complex_key_value_pair": {
+    "complex_key_value_pair_key1" : "complex_key_value_pair_value1",
+    "complex_key_value_pair_key2" : "complex_key_value_pair_value2",
+    "complex_key_value_pair_key3" : {
+      "complex_key_value_pair_key1_in_nested_hash": "complex_key_value_pair_value1_in_nested_hash",
+      "complex_key_value_pair_key2_in_nested_hash": "complex_key_value_pair_value2_in_nested_hash"
+      }
+    },
+
+  "array_of_hashes": [
+    {
+      "array_of_hashes_item1_key1": "array_of_hashes_item1_value1",
+      "array_of_hashes_item1_key2": "array_of_hashes_item1_value2"
+    },
+    {
+      "array_of_hashes_item2_key1": "array_of_hashes_item2_value1",
+      "array_of_hashes_item2_key2": "array_of_hashes_item2_value2"
+    }
+
+  ],
+  "array_of_mixed_simple_types": [1,2,"a","b"],
+  "array_of_same_simple_types": ["a","b"]
+}
+'''
+
+sampleJsonWithInvalidRegexp = '''
+{
+  "simple_key_value_pair": "%/^simple.*values$/%",
   "complex_key_value_pair": {
     "complex_key_value_pair_key1" : "complex_key_value_pair_value1",
     "complex_key_value_pair_key2" : "complex_key_value_pair_value2",
@@ -568,11 +664,11 @@ sampleJsonSchemaNonStrict = '''
                 "complex_key_value_pair_key3"
             ]
         },
-        "array_of_hashes": {
-            "id": "array_of_hashes",
-            "additionalItems": true,
-            "type": "array",
-            "items": [
+        "array_of_hashes":{
+            "id":"array_of_hashes",
+            "additionalItems":false,
+            "type":"array",
+            "items":[
                 {
                     "id": "0",
                     "required": [
@@ -609,11 +705,11 @@ sampleJsonSchemaNonStrict = '''
                 }
             ]
         },
-        "array_of_mixed_simple_types": {
-            "id": "array_of_mixed_simple_types",
-            "additionalItems": true,
-            "type": "array",
-            "items": [
+        "array_of_mixed_simple_types":{
+            "id":"array_of_mixed_simple_types",
+            "additionalItems":false,
+            "type":"array",
+            "items":[
                 {
                     "id": "0"
                 },
@@ -628,11 +724,11 @@ sampleJsonSchemaNonStrict = '''
                 }
             ]
         },
-        "array_of_same_simple_types": {
-            "id": "array_of_same_simple_types",
-            "additionalItems": true,
-            "type": "array",
-            "items": [
+        "array_of_same_simple_types":{
+            "id":"array_of_same_simple_types",
+            "additionalItems":false,
+            "type":"array",
+            "items":[
                 {
                     "id": "0"
                 },
@@ -1361,7 +1457,12 @@ sampleHttpMessageSchema =
 
 module.exports =
   emptyStringJson: emptyStringJson
+  shortSampleJson                  : shortSampleJson
+  shortSampleJsonWithAddedElement  : shortSampleJsonWithAddedElement
   sampleJson                       : sampleJson
+  sampleJsonArrayHasAdditionalElement: sampleJsonArrayHasAdditionalElement
+  sampleJsonWithValidRegexp        : sampleJsonWithValidRegexp
+  sampleJsonWithInvalidRegexp      : sampleJsonWithInvalidRegexp
   sampleJsonSchema                 : sampleJsonSchema
   sampleJsonSchemaNonStrict        : sampleJsonSchemaNonStrict
   sampleJsonSchemaNonStrict2        : sampleJsonSchemaNonStrict2

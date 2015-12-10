@@ -20,6 +20,7 @@ sylables = ['a','e','i','o','u']
 json_schema_options =
   singleError: false
   messages:
+    'additionalItems': (prop, val, validator) -> debugger; "The list #{prop} has an unexpected additional item: #{JSON.stringify val}"
     'minLength':   (prop, val, validator) -> "The #{prop} property must be at least #{validator} characters long (currently #{val.length} characters long)."
     'maxLength':   (prop, val, validator) -> "The #{prop} property must not exceed #{validator} characters (currently #{val.length} characters long)."
     'length':      (prop, val, validator) -> "The #{prop} property must be exactly #{validator} characters long (currently #{val.length} characters long)."

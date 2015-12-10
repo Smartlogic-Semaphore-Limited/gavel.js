@@ -63,13 +63,8 @@ class HeadersJsonExample extends JsonSchema
     properties.set
       keysStrict: false
       typesStrict : false
-      valuesStrict: [
-        'content-type'
-        'accept'
-        'accept-charset'
-        'accept-encoding'
-        'accept-language'
-      ]
+      valuesStrict: true # MZ: removed static list of headers, now verify values of all specified dupa
+							# ['content-type' 'accept' 'accept-charset' 'accept-encoding' 'accept-language' ]
 
     schemaGenerator = new SchemaV4Generator json: data, properties: properties
 
