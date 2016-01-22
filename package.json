@@ -23,7 +23,7 @@
     "json-pointer": "^0.3.0",
     "jsonlint": "~1.6.0",
     "media-typer": "~0.3.0",
-    "tv4": "https://github.com/Smartlogic-Semaphore-Limited/tv4.git#v1.1.12"
+    "tv4": "https://github.com/Smartlogic-Semaphore-Limited/tv4.git#v1.1.12mod"
   },
   "devDependencies": {
     "chai": "^2.1.0",
