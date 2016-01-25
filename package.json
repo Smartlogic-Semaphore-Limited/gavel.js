@@ -40,8 +40,8 @@
     "sinon": "^1.12.2"
   },
   "scripts": {
-    "test": "scripts/test",
-    "prepublish": "scripts/build"
+    "test": "bash -c 'scripts/test'",
+    "prepublish": "bash -c 'scripts/build'"
   },
   "repository": {
     "type": "git",
