@@ -60,9 +60,9 @@ describe 'JsonExample', ->
         before ->
           bodyValidator = new JsonExample fixtures.sampleJsonSimpleKeyMissing ,fixtures.sampleJson
         describe 'and i run validate()', ->
-          it "should return 2 errors", ->
+          it "should return 1 error", ->
             result = bodyValidator.validate()
-            assert.equal result.length, 2
+            assert.equal result.length, 1
 
       describe.skip 'when value has different primitive type', ->
         before ->
@@ -86,7 +86,7 @@ describe 'JsonExample', ->
         describe 'and i run validate()', ->
           it "should return an error", ->
             result = bodyValidator.validate()
-            assert.equal result.length, 2
+            assert.equal result.length, 1
 
       describe 'when array is longer than schema', ->
         before ->
@@ -94,8 +94,9 @@ describe 'JsonExample', ->
         describe 'and i run validate()', ->
           it "should return an error", ->
             result = bodyValidator.validate()
-            assert.equal result.length, 1
-            assert.equal result[0].message, 'The list list,2 has an unexpected additional item: c'
+            assert.equal result.length, 2
+            assert.equal result[0].message, 'At \'/list\' Array is too long (3), maximum 2'
+            assert.equal result[1].message, 'At \'/list/2\' Additional items not allowed'
 
       describe 'when value matches provided regexp', ->
         before ->

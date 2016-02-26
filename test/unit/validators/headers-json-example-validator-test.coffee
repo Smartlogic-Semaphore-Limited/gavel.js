@@ -48,9 +48,9 @@ describe 'HeadersJsonExample', ->
       before ->
         headersValidator = new HeadersJsonExample fixtures.sampleHeadersMixedCaseDiffers, fixtures.sampleHeaders
       describe 'and I run validate()', ->
-        it 'should not return error', ->
+        it 'should return error (value mismatch)', ->
           result = headersValidator.validate()
-          assert.lengthOf result, 0
+          assert.lengthOf result, 1
 
     describe 'when key is missing in provided headers', ->
       beforeEach ->
@@ -99,9 +99,9 @@ describe 'HeadersJsonExample', ->
         headersValidator = new HeadersJsonExample fixtures.sampleHeadersWithNonContentNegotiationChanged,  fixtures.sampleHeadersNonContentNegotiation
 
       describe 'and i run validate()', ->
-        it "shouldn't return any errors", ->
+        it "should return 2 errors", ->
           result = headersValidator.validate()
-          assert.equal result.length, 0
+          assert.equal result.length, 2
 
 
   describe '#validate()', () ->
