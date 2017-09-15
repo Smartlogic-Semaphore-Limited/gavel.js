@@ -10,7 +10,7 @@
     "gavel": "bin/gavel"
   },
   "dependencies": {
-    "amanda": "../../dependency/amanda/amanda-0.5.1.tgz",
+    "amanda": "https://github.com/Smartlogic-Semaphore-Limited/Amanda#master",
     "async": "^1.0.0",
     "caseless": "^0.10.0",
     "clone": "^1.0.0",
@@ -23,7 +23,7 @@
     "json-pointer": "^0.3.0",
     "jsonlint": "~1.6.0",
     "media-typer": "~0.3.0",
-    "tv4": "../../dependency/tv4/tv4-1.1.12.tgz"
+    "tv4": "https://github.com/Smartlogic-Semaphore-Limited/tv4#v1.1.12-sl-mod"
   },
   "devDependencies": {
     "chai": "^2.1.0",
